@@ -6,3 +6,4 @@ export const ContactListItem = ({ name, number, onDelete, id }) => {
     </li>
   );
 };
+// text
