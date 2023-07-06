@@ -56,7 +56,11 @@ export class ContactForm extends Component {
             required
           />
         </label>
-        <button type="submit" className={button}>
+        <button
+          type="submit"
+          disabled={state.name === '' || state.number === '' ? true : false}
+          className={button}
+        >
           Add contact
         </button>
       </form>

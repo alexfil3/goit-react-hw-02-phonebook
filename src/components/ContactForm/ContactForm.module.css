@@ -38,3 +38,9 @@
     color: white;
     cursor: pointer;
 }
+
+.button:disabled {
+    background-color: inherit;
+    color: rgba(118, 118, 118, 0.3);
+    cursor: not-allowed;
+}
