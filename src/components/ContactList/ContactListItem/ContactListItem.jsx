@@ -1,4 +1,5 @@
 import css from './ContactListItem.module.css';
+import PropTypes from 'prop-types';
 
 export const ContactListItem = ({ name, number, onDelete, id }) => {
   const { item, text, span, button } = css;
@@ -12,4 +13,11 @@ export const ContactListItem = ({ name, number, onDelete, id }) => {
       </button>
     </li>
   );
+};
+
+ContactListItem.propTypes = {
+  name: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
 };

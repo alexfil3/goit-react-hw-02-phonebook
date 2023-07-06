@@ -22,7 +22,9 @@ export class App extends Component {
       ...data,
     };
 
-    this.state.contacts.map(({ name }) => name).includes(dataWithId.name)
+    this.state.contacts
+      .map(({ name }) => name.toLocaleLowerCase())
+      .includes(dataWithId.name.toLocaleLowerCase())
       ? alert(`${dataWithId.name} is already in contacts`)
       : this.setState(prevState => ({
           contacts: [dataWithId, ...prevState.contacts],
