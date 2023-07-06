@@ -3,6 +3,7 @@ import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
 import { v4 as uuidv4 } from 'uuid';
+import css from './App.module.css';
 
 export class App extends Component {
   state = {
@@ -21,8 +22,8 @@ export class App extends Component {
       ...data,
     };
 
-    this.state.contacts.map(({ name }) => name).includes(data.name)
-      ? alert(`${data.name} is already in contacts`)
+    this.state.contacts.map(({ name }) => name).includes(dataWithId.name)
+      ? alert(`${dataWithId.name} is already in contacts`)
       : this.setState(prevState => ({
           contacts: [dataWithId, ...prevState.contacts],
         }));
@@ -47,31 +48,25 @@ export class App extends Component {
       contact => contact.id !== e.currentTarget.parentNode.id
     );
     this.setState({ contacts: filter });
-    console.log(filter);
-    console.log(e.currentTarget.parentNode.id);
   };
 
   render() {
+    const {
+      formSubmitHandler,
+      filterHandler,
+      onFilterChange,
+      deleteHandler,
+      state,
+    } = this;
+    const { container, title } = css;
+
     return (
-      <div
-        style={{
-          height: '100vh',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          fontSize: 40,
-          color: '#010101',
-        }}
-      >
-        <h1>Phonebook</h1>
-        <ContactForm onSubmit={this.formSubmitHandler} />
-        <h2>Contacts</h2>
-        <Filter onChange={this.filterHandler} value={this.state.filter} />
-        <ContactList
-          contacts={this.onFilterChange()}
-          onDelete={this.deleteHandler}
-        />
+      <div className={container}>
+        <h1 className={title}>Phonebook</h1>
+        <ContactForm onSubmit={formSubmitHandler} />
+        <h2 className={title}>Contacts</h2>
+        <Filter onChange={filterHandler} value={state.filter} />
+        <ContactList contacts={onFilterChange()} onDelete={deleteHandler} />
       </div>
     );
   }
